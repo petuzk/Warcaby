@@ -16,11 +16,11 @@ raylib/src/libraylib.a: raylib/src/raylib.h
 	if [ -f "raylib/src/libraylib.a" ]; then echo "raylib successfully compiled"; else exit 2; fi
 
 build: raylib/src/libraylib.a
-	clang++ $(CC_FLAGS) $(CC_LIBS) $(CC_INC) -o mygame \
+	clang++ $(CC_FLAGS) $(CC_LIBS) $(CC_INC) -o warcaby \
 		src/*.cpp src/ai/*.cpp \
 		src/game/*.cpp src/game/board/*.cpp src/game/checker/*.cpp src/game/player/*.cpp \
 		src/graphics/*.cpp src/graphics/overlay/*.cpp src/graphics/primitives/*.cpp \
 		src/graphics/rendering/*.cpp src/graphics/scene/*.cpp
 
 run:
-	./mygame
+	./warcaby
