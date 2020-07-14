@@ -3,13 +3,13 @@
 #include "inc/graphics/overlay/MenuOverlay.hpp"
 
 class MainMenuOverlay: public MenuOverlay {
-	static std::vector<rl::Rectangle> clickables;
+	static std::vector<rl::Rectangle> clicky;
 
 	bool playersAreAI[2];
 
 public:
 	MainMenuOverlay();
 
-	void draw();
+	void drawOverlay();
 	void update();
 };

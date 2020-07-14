@@ -1,6 +1,7 @@
 #pragma once
 
 #include <chrono>
+#include <functional>
 
 using namespace std::chrono;
 
@@ -12,11 +13,14 @@ public:
 		FOREGROUND
 	};
 
+	typedef std::function<void()> onEndCallbackType;
+
 protected:
 	State state;
 	bool started;
 	milliseconds duration;
 	milliseconds startTime;
+	onEndCallbackType onEndCallback;
 
 	static milliseconds time();
 
@@ -30,6 +34,8 @@ public:
 
 	State getState();
 	virtual State animate();
+
+	virtual void onEnd(onEndCallbackType callback);
 
 	void stop();
 };

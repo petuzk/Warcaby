@@ -5,7 +5,7 @@
 #include "inc/game/player/Player.hpp"
 
 class GameEndOverlay: public MenuOverlay {
-	static std::vector<rl::Rectangle> clickables;
+	static std::vector<rl::Rectangle> clicky;
 
 	std::string message;
 
@@ -14,6 +14,6 @@ public:
 
 	void show(Player* winner);
 
-	void draw();
+	void drawOverlay();
 	void update();
 };

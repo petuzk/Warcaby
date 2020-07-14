@@ -29,6 +29,7 @@ float Camera::TargetDistanceAnimation::getProgress(float linearProgress) {
 
 void Camera::TargetDistanceAnimation::updateProperty(float dist) {
 	cam->setDistance(dist);
+	// no need to call cam->recalculatePos() since this animation runs with ZRotationAnimation
 }
 
 
@@ -43,7 +44,7 @@ void Camera::FlyAnimation::updateProperty(float angle) {
 }
 
 Animation::State Camera::FlyAnimation::animate() {
-	// animacja zakończona z powodu innego, niż upłynięcie czasu
+	// animation finished for other reason than time
 	if (state == Animation::FINISHED) {
 		return Animation::FINISHED;
 	}
@@ -109,9 +110,9 @@ void Camera::end3D() {
 }
 
 void Camera::stopFlying() {
-	// zakończone animacje są automatycznie usuwane przez Animator
 	if (flyAnim) {
 		flyAnim->stop();
+		// animation will be freed by animator
 		flyAnim = nullptr;
 	}
 }
@@ -131,8 +132,6 @@ void Camera::fly() {
 }
 
 void Camera::moveToSide(Player::Side side) {
-	// ponieważ nie można wprost sprawdzać wartości zmiennoprzecinkowe,
-	// wprowadzono zmienne pomocznicze
 	if (!playerView || playerViewSide != side) {
 		playerView = true;
 		playerViewSide = side;

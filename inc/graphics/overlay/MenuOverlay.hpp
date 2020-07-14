@@ -15,7 +15,7 @@ protected:
 
 	static void static_init();
 
-	MenuOverlay(const std::vector<rl::Rectangle>& clickables);
+	MenuOverlay(const std::vector<rl::Rectangle>& clicky);
 
 	void drawBg();
 

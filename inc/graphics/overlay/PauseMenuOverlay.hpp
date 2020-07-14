@@ -3,11 +3,11 @@
 #include "inc/graphics/overlay/MenuOverlay.hpp"
 
 class PauseMenuOverlay: public MenuOverlay {
-	static std::vector<rl::Rectangle> clickables;
+	static std::vector<rl::Rectangle> clicky;
 
 public:
 	PauseMenuOverlay();
 
-	void draw();
+	void drawOverlay();
 	void update();
 };

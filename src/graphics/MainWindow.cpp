@@ -2,6 +2,7 @@
 
 MainWindow::MainWindow() {
 	rl::SetTraceLogLevel(rl::LOG_WARNING);
+	rl::SetConfigFlags(rl::FLAG_WINDOW_RESIZABLE);
 	rl::InitWindow(winWidth, winHeight, "Warcaby");
 	rl::SetExitKey(0);
 

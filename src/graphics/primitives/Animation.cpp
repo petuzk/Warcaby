@@ -2,7 +2,7 @@
 #include "inc/graphics/primitives/Animator.hpp"
 
 Animation::Animation(milliseconds duration, bool parallelToPrev, Animation::State state):
-	started(false), duration(duration), state(state)
+	started(false), duration(duration), state(state), onEndCallback(nullptr)
 {
 	Animator::getInstance()->addAnimation(this, parallelToPrev);
 }
@@ -47,7 +47,15 @@ Animation::State Animation::animate() {
 		animate(getProgress(linear));
 	}
 
+	if (state == FINISHED && onEndCallback) {
+		onEndCallback();
+	}
+
 	return state;
+}
+
+void Animation::onEnd(Animation::onEndCallbackType callback) {
+	onEndCallback = callback;
 }
 
 void Animation::stop() {

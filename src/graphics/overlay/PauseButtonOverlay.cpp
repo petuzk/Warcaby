@@ -3,30 +3,44 @@
 
 rl::Texture PauseButtonOverlay::pause = { 0 };
 rl::Texture PauseButtonOverlay::pauseSelected = { 0 };
-std::vector<rl::Rectangle> PauseButtonOverlay::clickables({
-	{ 884, 12, 64, 54 }  // przycisk
+std::vector<rl::Rectangle> PauseButtonOverlay::clicky({
+	{ 0, 0, 64, 54 }  // the button itself
 });
 
-PauseButtonOverlay::PauseButtonOverlay(): Overlay(clickables[0], clickables, Animation::BACKGROUND) {
+// old overlay rectangle: { 884, 12, 64, 54 }
+
+PauseButtonOverlay::PauseButtonOverlay():
+	Overlay(
+		{ 64, 54 },
+		{
+			(884.0f + 64.0f/2.0f) / MainWindow::winWidth,
+			( 12.0f + 54.0f/2.0f) / MainWindow::winHeight
+		},
+		54.0f / MainWindow::winHeight,
+		clicky,
+		Animation::BACKGROUND
+	)
+{
 	if (pause.width == 0) {
 		pause = rl::LoadTexture("resources/images/menu/pause.png");
 		pauseSelected = rl::LoadTexture("resources/images/menu/pause_selected.png");
+
+		rl::SetTextureFilter(pause, rl::FILTER_BILINEAR);
+		rl::SetTextureFilter(pauseSelected, rl::FILTER_BILINEAR);
 	}
 }
 
 void PauseButtonOverlay::update() {
-	if (isHidden()) {
-		return;
-	}
-
 	Overlay::update();
 
-	if (rl::IsMouseButtonPressed(rl::MOUSE_LEFT_BUTTON) && hovered == 0) {
-		hovered = -1;
-		MainWindow::getInstance()->getPauseMenu()->setHidden(false);
+	if (isVisible()) {
+		if (rl::IsMouseButtonPressed(rl::MOUSE_LEFT_BUTTON) && selectedClicky == 0) {
+			selectedClicky = -1;
+			MainWindow::getInstance()->getPauseMenu()->setHidden(false);
+		}
 	}
 }
 
-void PauseButtonOverlay::draw() {
-	rl::DrawTextureV(hovered == 0 ? pauseSelected : pause, getPos({ clickables[0].x, clickables[0].y }), rl::WHITE);
+void PauseButtonOverlay::drawOverlay() {
+	rl::DrawTextureV(selectedClicky == 0 ? pauseSelected : pause, { clicky[0].x, clicky[0].y }, rl::WHITE);
 }

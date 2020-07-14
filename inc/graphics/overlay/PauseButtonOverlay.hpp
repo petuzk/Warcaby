@@ -5,11 +5,11 @@
 class PauseButtonOverlay: public Overlay {
 	static rl::Texture pause;
 	static rl::Texture pauseSelected;
-	static std::vector<rl::Rectangle> clickables;
+	static std::vector<rl::Rectangle> clicky;
 
 public:
 	PauseButtonOverlay();
 
-	void draw();
+	void drawOverlay();
 	void update();
 };

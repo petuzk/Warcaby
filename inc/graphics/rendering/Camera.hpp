@@ -5,7 +5,7 @@
 #include "inc/graphics/primitives/Updatable.hpp"
 #include "inc/graphics/rendering/ShaderProvider.hpp"
 
-#include <math.h>  // na potrzebę raymath
+#include <math.h>  // to avoid errors when including raymath inside namespace
 namespace rl {
 	extern "C" {
 		#include "raylib.h"
